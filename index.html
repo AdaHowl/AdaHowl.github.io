@@ -2,121 +2,113 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Flat Business Profile Widget</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Form</title>
   <style>
     body {
-      background-color: #A67C52;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f7f7;
       margin: 0;
+      padding: 50px;
     }
 
-    .login-container {
-      background-color: #D9C7A6;
-      border-radius: 10px;
-      width: 320px;
-      padding: 40px 20px 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      position: relative;
-      text-align: center;
-    }
-
-    .login-container::before {
-      content: "";
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 40px;
-      background-color: #D9C7A6;
-      clip-path: polygon(50% 0, 0% 100%, 100% 100%);
-    }
-
-    .profile-img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #fff;
-      margin-bottom: 10px;
+    .form-container {
+      width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 30px 40px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
 
     h2 {
-      margin: 10px 0 30px;
-      color: white;
-      font-size: 16px;
+      margin-top: 0;
+      font-size: 24px;
+      color: #333;
     }
 
-    .input-group {
-      position: relative;
-      margin-bottom: 15px;
-      width: 80%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .input-group i {
-      position: absolute;
-      top: 50%;
-      left: 10px;
-      transform: translateY(-50%);
-      color: #8B5E3C;
-    }
-
-    .input-group input {
-      width: 100%;
-      padding: 10px 10px 10px 35px;
+    .form-container p {
+      color: #777;
+      margin-bottom: 20px;
       font-size: 14px;
-      border: none;
-      border-radius: 5px;
-      background-color: #FFFFCC;
     }
 
-    .submit-btn {
-      width: 84%;
-      padding: 10px;
-      background-color: #8B5E3C;
-      color: white;
+    label {
+      display: block;
+      margin-bottom: 6px;
       font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      color: #555;
     }
 
-    .footer {
-      margin-top: 20px;
-      font-size: 11px;
-      color: #fff;
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .submit-button {
+      background-color: #d86b65;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background-color: #c45853;
     }
   </style>
 </head>
 <body>
+  <div class="form-container">
+    <h2>Contact Form</h2>
+    <p>Please fill all the texts in the fields.</p>
+    <form>
+      <label for="name">Your Name :</label>
+      <input type="text" id="name" name="name" placeholder="Your Full Name" required />
 
-  <div class="login-container">
-    <img class="profile-img" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile Picture">
-    <h2>Chào Mọi Người Nha </h2>
-    
-    <div class="input-group">
-      <i class="fa fa-user"></i>
-      <input type="text" placeholder="Tên đăng nhập">
-    </div>
-    
-    <div class="input-group">
-      <i class="fa fa-lock"></i>
-      <input type="password" placeholder="Vui lòng nhập mật khẩu">
-    </div>
-    
-    <button class="submit-btn">Submit</button>
-    
-    <div class="footer">
-      © 2016 Flat Business Profile Widget. All rights reserved
-    </div>
+      <label for="email">Your Email :</label>
+      <input type="email" id="email" name="email" placeholder="Valid Email Address" required />
+
+      <label for="message">Message :</label>
+      <textarea id="message" name="message" placeholder="Your Message to Us" required></textarea>
+
+      <label for="subject">Subject :</label>
+      <select id="subject" name="subject" required>
+        <option value="Job Inquiry">Job Inquiry</option>
+        <option value="Support">Support</option>
+        <option value="Feedback">Feedback</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <button type="submit" class="submit-button">Send</button>
+    </form>
   </div>
-
 </body>
 </html>
