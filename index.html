@@ -1,197 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>Haxball Clone</title>
   <style>
     canvas {
-      background: white;
+      background: #2e2e2e;
       display: block;
       margin: 0 auto;
+      border: 2px solid #fff;
     }
   </style>
 </head>
 <body>
-<canvas id="gameCanvas" width="800" height="400"></canvas>
-<script>
-  const canvas = document.getElementById("gameCanvas");
-  const ctx = canvas.getContext("2d");
+  <canvas id="game" width="800" height="500"></canvas>
 
-  const keys = {};
-  document.addEventListener("keydown", (e) => (keys[e.code] = true));
-  document.addEventListener("keyup", (e) => (keys[e.code] = false));
+  <script>
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
 
-  class Player {
-    constructor(x, y, color, controls, speedModifier = 1) {
-      this.x = x;
-      this.y = y;
-      this.radius = 20;
-      this.color = color;
-      this.controls = controls;
-      this.speedModifier = speedModifier;
-      this.vx = 0;
-      this.vy = 0;
-    }
+    const WIDTH = canvas.width;
+    const HEIGHT = canvas.height;
 
-    update() {
-      const speed = 1.2 * this.speedModifier;
-      this.vx = 0;
-      this.vy = 0;
-      if (keys[this.controls.up]) this.vy = -speed;
-      if (keys[this.controls.down]) this.vy = speed;
-      if (keys[this.controls.left]) this.vx = -speed;
-      if (keys[this.controls.right]) this.vx = speed;
+    const keys = {};
 
-      this.x += this.vx;
-      this.y += this.vy;
+    document.addEventListener("keydown", (e) => {
+      keys[e.code] = true;
+    });
 
-      // Giữ trong canvas
-      this.x = Math.max(this.radius, Math.min(canvas.width - this.radius, this.x));
-      this.y = Math.max(this.radius, Math.min(canvas.height - this.radius, this.y));
-    }
+    document.addEventListener("keyup", (e) => {
+      keys[e.code] = false;
+    });
 
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-    }
-  }
-
-  class Ball {
-    constructor(x, y) {
-      this.x = x;
-      this.y = y;
-      this.radius = 10;
-      this.vx = 0;
-      this.vy = 0;
-    }
-
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-
-      // friction
-      this.vx *= 0.985;
-      this.vy *= 0.985;
-
-      // Wall collision
-      if (this.x < this.radius || this.x > canvas.width - this.radius) {
-        this.vx *= -1;
-        this.x = Math.max(this.radius, Math.min(canvas.width - this.radius, this.x));
+    class Player {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.radius = 20;
+        this.color = color;
+        this.speedX = 0;
+        this.speedY = 0;
+        this.maxSpeed = 2;
+        this.friction = 0.9;
       }
-      if (this.y < this.radius || this.y > canvas.height - this.radius) {
-        this.vy *= -1;
-        this.y = Math.max(this.radius, Math.min(canvas.height - this.radius, this.y));
+
+      update() {
+        if (keys["KeyW"]) this.speedY -= 0.15; // chậm hơn
+        if (keys["KeyS"]) this.speedY += 0.15;
+        if (keys["KeyA"]) this.speedX -= 0.15;
+        if (keys["KeyD"]) this.speedX += 0.15;
+
+        this.speedX *= this.friction;
+        this.speedY *= this.friction;
+
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        this.x = Math.max(this.radius, Math.min(WIDTH - this.radius, this.x));
+        this.y = Math.max(this.radius, Math.min(HEIGHT - this.radius, this.y));
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
       }
     }
 
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = "black";
-      ctx.fill();
-    }
-  }
+    class Ball {
+      constructor() {
+        this.x = WIDTH / 2;
+        this.y = HEIGHT / 2;
+        this.radius = 15;
+        this.speedX = 0;
+        this.speedY = 0;
+        this.friction = 0.98;
+      }
 
-  const player1 = new Player(100, 200, "red", {
-    up: "KeyW",
-    down: "KeyS",
-    left: "KeyA",
-    right: "KeyD"
-  }, 1);
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
 
-  const player2 = new Player(700, 200, "blue", {
-    up: "ArrowUp",
-    down: "ArrowDown",
-    left: "ArrowLeft",
-    right: "ArrowRight"
-  }, 0.85); // Chậm hơn chút
+        this.speedX *= this.friction;
+        this.speedY *= this.friction;
 
-  const ball = new Ball(400, 200);
+        if (this.x < this.radius || this.x > WIDTH - this.radius) {
+          this.speedX *= -0.95;
+          this.x = Math.max(this.radius, Math.min(WIDTH - this.radius, this.x));
+        }
 
-  let score = [0, 0];
-  const goalWidth = 100;
-  const goalHeight = 100;
+        if (this.y < this.radius || this.y > HEIGHT - this.radius) {
+          this.speedY *= -0.95;
+          this.y = Math.max(this.radius, Math.min(HEIGHT - this.radius, this.y));
+        }
+      }
 
-  function detectCollision(p, b) {
-    const dx = b.x - p.x;
-    const dy = b.y - p.y;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    if (distance < p.radius + b.radius) {
-      const angle = Math.atan2(dy, dx);
-      const force = 1.5;
-      b.vx = Math.cos(angle) * force;
-      b.vy = Math.sin(angle) * force;
-    }
-  }
-
-  function checkGoal() {
-    if (
-      ball.y > canvas.height / 2 - goalHeight / 2 &&
-      ball.y < canvas.height / 2 + goalHeight / 2
-    ) {
-      if (ball.x < ball.radius) {
-        score[1]++;
-        resetGame();
-      } else if (ball.x > canvas.width - ball.radius) {
-        score[0]++;
-        resetGame();
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "white";
+        ctx.fill();
       }
     }
 
-    if (score[0] === 5 || score[1] === 5) {
-      score = [0, 0];
-      resetGame();
+    function resolveElasticCollision(p1, p2) {
+      const dx = p2.x - p1.x;
+      const dy = p2.y - p1.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < p1.radius + p2.radius) {
+        const angle = Math.atan2(dy, dx);
+        const sin = Math.sin(angle);
+        const cos = Math.cos(angle);
+
+        const v1 = {
+          x: p1.speedX * cos + p1.speedY * sin,
+          y: p1.speedY * cos - p1.speedX * sin
+        };
+        const v2 = {
+          x: p2.speedX * cos + p2.speedY * sin,
+          y: p2.speedY * cos - p2.speedX * sin
+        };
+
+        // Không hoán đổi vận tốc — cho bóng chỉ bị trượt nhẹ
+        const fx2 = v2.x * cos - v2.y * sin;
+        const fy2 = v2.y * cos + v2.x * sin;
+
+        p2.speedX = fx2 * 0.5; // ít phản lực hơn
+        p2.speedY = fy2 * 0.5;
+
+        const overlap = (p1.radius + p2.radius - dist) / 2;
+        p1.x -= overlap * cos;
+        p1.y -= overlap * sin;
+        p2.x += overlap * cos;
+        p2.y += overlap * sin;
+      }
     }
-  }
 
-  function resetGame() {
-    ball.x = canvas.width / 2;
-    ball.y = canvas.height / 2;
-    ball.vx = 0;
-    ball.vy = 0;
+    const player = new Player(200, HEIGHT / 2, "red");
+    const ball = new Ball();
 
-    player1.x = 100;
-    player1.y = 200;
-    player2.x = 700;
-    player2.y = 200;
-  }
+    function shootBall() {
+      const dx = ball.x - player.x;
+      const dy = ball.y - player.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < player.radius + ball.radius + 5) {
+        const angle = Math.atan2(dy, dx);
+        const power = 12;
+        ball.speedX += Math.cos(angle) * power;
+        ball.speedY += Math.sin(angle) * power;
+      }
+    }
 
-  function drawGoals() {
-    ctx.fillStyle = "lightgray";
-    ctx.fillRect(0, canvas.height / 2 - goalHeight / 2, 5, goalHeight);
-    ctx.fillRect(canvas.width - 5, canvas.height / 2 - goalHeight / 2, 5, goalHeight);
-  }
+    function gameLoop() {
+      ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
-  function drawScore() {
-    ctx.font = "24px Arial";
-    ctx.fillStyle = "black";
-    ctx.fillText(`${score[0]} - ${score[1]}`, canvas.width / 2 - 30, 30);
-  }
+      player.update();
+      ball.update();
 
-  function gameLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+      resolveElasticCollision(player, ball);
 
-    player1.update();
-    player2.update();
-    ball.update();
+      if (keys["Space"]) shootBall();
 
-    detectCollision(player1, ball);
-    detectCollision(player2, ball);
-    checkGoal();
+      player.draw();
+      ball.draw();
 
-    drawGoals();
-    drawScore();
-    player1.draw();
-    player2.draw();
-    ball.draw();
+      requestAnimationFrame(gameLoop);
+    }
 
-    requestAnimationFrame(gameLoop);
-  }
-
-  gameLoop();
-</script>
+    gameLoop();
+  </script>
 </body>
 </html>
