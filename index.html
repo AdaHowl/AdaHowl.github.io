@@ -10,105 +10,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Đăng Nhập</title>
   <style>
     body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f7f7f7;
-      margin: 0;
-      padding: 50px;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    .form-container {
-      width: 400px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 30px 40px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    .login-form {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 300px;
     }
 
-    h2 {
-      margin-top: 0;
-      font-size: 24px;
-      color: #333;
-    }
-
-    .form-container p {
-      color: #777;
+    .login-form h2 {
+      text-align: center;
       margin-bottom: 20px;
-      font-size: 14px;
     }
 
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-      color: #555;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    textarea,
-    select {
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
       width: 100%;
       padding: 10px;
+      margin: 10px 0;
       border: 1px solid #ccc;
-      border-radius: 3px;
-      box-sizing: border-box;
-      font-size: 14px;
-      margin-bottom: 15px;
+      border-radius: 5px;
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    .submit-button {
-      background-color: #d86b65;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
+    .login-form button {
       width: 100%;
-      transition: background-color 0.3s ease;
+      padding: 10px;
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
     }
 
-    .submit-button:hover {
-      background-color: #c45853;
+    .login-form button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Contact Form</h2>
-    <p>Please fill all the texts in the fields.</p>
-    <form>
-      <label for="name">Your Name :</label>
-      <input type="text" id="name" name="name" placeholder="Your Full Name" required />
-
-      <label for="email">Your Email :</label>
-      <input type="email" id="email" name="email" placeholder="Valid Email Address" required />
-
-      <label for="message">Message :</label>
-      <textarea id="message" name="message" placeholder="Your Message to Us" required></textarea>
-
-      <label for="subject">Subject :</label>
-      <select id="subject" name="subject" required>
-        <option value="Job Inquiry">Job Inquiry</option>
-        <option value="Support">Support</option>
-        <option value="Feedback">Feedback</option>
-        <option value="Other">Other</option>
-      </select>
-
-      <button type="submit" class="submit-button">Send</button>
-    </form>
-  </div>
+  <form class="login-form" action="#" method="post">
+    <h2>Đăng Nhập</h2>
+    <input type="text" name="username" placeholder="Tên đăng nhập" required>
+    <input type="password" name="password" placeholder="Mật khẩu" required>
+    <button type="submit">Đăng nhập</button>
+  </form>
 </body>
 </html>
