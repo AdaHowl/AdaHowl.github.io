@@ -2,173 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Haxball Clone</title>
-  <style>
-    canvas {
-      background: #2e2e2e;
-      display: block;
-      margin: 0 auto;
-      border: 2px solid #fff;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMW RoyalDrive</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="game" width="800" height="500"></canvas>
 
-  <script>
-    const canvas = document.getElementById("game");
-    const ctx = canvas.getContext("2d");
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo-container" onclick="location.reload()">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2048px-BMW.svg.png" alt="BMW Logo" class="logo-img" />
+      <span class="logo-text">BMW</span>
+    </div>
 
-    const WIDTH = canvas.width;
-    const HEIGHT = canvas.height;
+    <ul class="nav-links">
+      <li><a href="#" onclick="scrollToTop()">Home</a></li>
+      <li class="dropdown" id="menu-cars">
+        <a href="#">BMW ▾</a>
+        <ul class="dropdown-menu small-dropdown">
+          <li><a href="#">BMW 3 Series</a></li>
+          <li><a href="#">BMW 5 Series</a></li>
+          <li><a href="#">BMW 7 Series</a></li>
+          <li><a href="#">BMW X5</a></li>
+          <li><a href="#">BMW iX</a></li>
+        </ul>
+      </li>
+      <li><a href="#">News</a></li>
+      <li><a href="#">Contact</a></li>
+      <li class="dropdown" id="menu-auth">
+        <a href="#" class="login-highlight">Login ▾</a>
+        <ul class="dropdown-menu small-dropdown auth-menu">
+          <li><a href="#" id="openRegister">Sign Up</a></li>
+          <li><a href="#" id="openLogin">Login</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 
-    const keys = {};
+  <!-- Hero Background Section -->
+  <header class="hero-section" id="heroSection"></header>
 
-    document.addEventListener("keydown", (e) => {
-      keys[e.code] = true;
-    });
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content narrow">
+      <span class="close-btn" id="closeLogin">&times;</span>
+      <h2>Login</h2>
+      <form>
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
 
-    document.addEventListener("keyup", (e) => {
-      keys[e.code] = false;
-    });
+  <!-- Register Modal -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content narrow">
+      <span class="close-btn" id="closeRegister">&times;</span>
+      <h2>Create Account</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  </div>
 
-    class Player {
-      constructor(x, y, color) {
-        this.x = x;
-        this.y = y;
-        this.radius = 20;
-        this.color = color;
-        this.speedX = 0;
-        this.speedY = 0;
-        this.maxSpeed = 2;
-        this.friction = 0.9;
-      }
+  <!-- Car Showroom Section -->
+  <section class="car-showroom">
+    <h2 class="section-title">BMW Showroom</h2>
+    <div class="car-grid">
+      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/06/icon_320isportline.png"><h3>BMW 320i Sport Line LCI</h3><p>1.529.000.000 đ</p></div>
+      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/06/icon_320isport.png"><h3>BMW 320i M Sport LCI</h3><p>1.635.000.000 đ</p></div>
+      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/06/icon_330i.png"><h3>BMW 330i M Sport LCI</h3><p>1.989.000.000 đ</p></div>
+      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2022/11/Artboard-1-copy-3.png"><h3>BMW 520i LCI</h3><p>1.979.000.000 ₫</p></div>
+      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2022/11/520i.png"><h3>BMW 520i M Sport LCI</h3><p>2.169.000.000 ₫</p></div>
+      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2022/11/530i.png"><h3>BMW 530i M Sport LCI</h3><p>2.759.000.000 ₫</p></div>
+      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/08/x7-lci.png"><h3>BMW X7</h3><p>5.549.000.000 đ</p></div>
+      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2022/12/x3.png"><h3>BMW X3</h3><p>1.855.000.000 ₫</p></div>
+      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/05/z5248889924760_a9e0a75792b2557163d0b55e2d2f698e.jpg"><h3>BMW X4</h3><p>2.999.000.000 đ</p></div>
+    </div>
+  </section>
 
-      update() {
-        if (keys["KeyW"]) this.speedY -= 0.15; // chậm hơn
-        if (keys["KeyS"]) this.speedY += 0.15;
-        if (keys["KeyA"]) this.speedX -= 0.15;
-        if (keys["KeyD"]) this.speedX += 0.15;
-
-        this.speedX *= this.friction;
-        this.speedY *= this.friction;
-
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        this.x = Math.max(this.radius, Math.min(WIDTH - this.radius, this.x));
-        this.y = Math.max(this.radius, Math.min(HEIGHT - this.radius, this.y));
-      }
-
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-      }
-    }
-
-    class Ball {
-      constructor() {
-        this.x = WIDTH / 2;
-        this.y = HEIGHT / 2;
-        this.radius = 15;
-        this.speedX = 0;
-        this.speedY = 0;
-        this.friction = 0.98;
-      }
-
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        this.speedX *= this.friction;
-        this.speedY *= this.friction;
-
-        if (this.x < this.radius || this.x > WIDTH - this.radius) {
-          this.speedX *= -0.95;
-          this.x = Math.max(this.radius, Math.min(WIDTH - this.radius, this.x));
-        }
-
-        if (this.y < this.radius || this.y > HEIGHT - this.radius) {
-          this.speedY *= -0.95;
-          this.y = Math.max(this.radius, Math.min(HEIGHT - this.radius, this.y));
-        }
-      }
-
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "white";
-        ctx.fill();
-      }
-    }
-
-    function resolveElasticCollision(p1, p2) {
-      const dx = p2.x - p1.x;
-      const dy = p2.y - p1.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < p1.radius + p2.radius) {
-        const angle = Math.atan2(dy, dx);
-        const sin = Math.sin(angle);
-        const cos = Math.cos(angle);
-
-        const v1 = {
-          x: p1.speedX * cos + p1.speedY * sin,
-          y: p1.speedY * cos - p1.speedX * sin
-        };
-        const v2 = {
-          x: p2.speedX * cos + p2.speedY * sin,
-          y: p2.speedY * cos - p2.speedX * sin
-        };
-
-        // Không hoán đổi vận tốc — cho bóng chỉ bị trượt nhẹ
-        const fx2 = v2.x * cos - v2.y * sin;
-        const fy2 = v2.y * cos + v2.x * sin;
-
-        p2.speedX = fx2 * 0.6; // ít phản lực hơn
-        p2.speedY = fy2 * 0.5;
-
-        const overlap = (p1.radius + p2.radius - dist) / 2;
-        p1.x -= overlap * cos;
-        p1.y -= overlap * sin;
-        p2.x += overlap * cos;
-        p2.y += overlap * sin;
-      }
-    }
-
-    const player = new Player(200, HEIGHT / 2, "red");
-    const ball = new Ball();
-
-    function shootBall() {
-      const dx = ball.x - player.x;
-      const dy = ball.y - player.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < player.radius + ball.radius + 5) {
-        const angle = Math.atan2(dy, dx);
-        const power = 12;
-        ball.speedX += Math.cos(angle) * power;
-        ball.speedY += Math.sin(angle) * power;
-      }
-    }
-
-    function gameLoop() {
-      ctx.clearRect(0, 0, WIDTH, HEIGHT);
-
-      player.update();
-      ball.update();
-
-      resolveElasticCollision(player, ball);
-
-      if (keys["Space"]) shootBall();
-
-      player.draw();
-      ball.draw();
-
-      requestAnimationFrame(gameLoop);
-    }
-
-    gameLoop();
-  </script>
+  <script src="script.js"></script>
 </body>
-</html>
+</html

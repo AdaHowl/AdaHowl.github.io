@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+/* Hero Section Background */
+.hero-section {
+  background: url("https://bmwhcmc.vn/storage/ctbh-t12025/the-3-1.png") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  position: relative;
+  transition: all 0.4s ease;
+}
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* Shrinking effect */
+body.shrink .hero-section {
+  height: 20vh;
+  opacity: 0.4;
+}
+
+/* NAVBAR */
+.navbar {
+  background: #10141c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.logo-img {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+}
+.logo-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 24px;
+}
+.nav-links li {
+  position: relative;
+}
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: 0.3s ease;
+}
+.nav-links li a:hover {
+  background-color: #00f7ff;
+  color: #10141c;
+}
+.login-highlight {
+  background-color: #00f7ff;
+  color: #10141c;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 8px 16px;
+  transition: 0.3s ease;
+}
+
+/* DROPDOWN MENU */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background-color: #1a1f2c;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  list-style: none;
+  z-index: 999;
+}
+.dropdown-menu li a {
+  display: block;
+  padding: 8px 20px;
+  color: white;
+  white-space: nowrap;
+}
+.dropdown.show .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.small-dropdown {
+  width: max-content;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 320px;
+  color: #000;
+  position: relative;
+}
+.modal-content input,
+.modal-content button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.modal-content button {
+  background-color: #00f7ff;
+  border: none;
+  font-weight: bold;
+  color: #10141c;
+}
+
+/* CAR SHOWROOM */
+.car-showroom {
+  padding: 60px 40px;
+  background: #000;
+  text-align: center;
+}
+.section-title {
+  font-size: 32px;
+  margin-bottom: 40px;
+  color: #00f7ff;
+  font-weight: bold;
+}
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+}
+.car-card {
+  background: #10141c;
+  padding: 16px;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+.car-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background: #fff;
+  padding: 10px;
+  border-radius: 8px;
+}
+.car-card h3 {
+  color: #00f7ff;
+  margin: 12px 0 6px;
+}
+.car-card p {
+  color: #ccc;
+  font-size: 16px;
+}
