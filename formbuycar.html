@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký mua xe BMW</title>
+  <style>
+    body {
+      background: linear-gradient(120deg, #10141c 60%, #00f7ff 100%);
+      min-height: 100vh;
+      font-family: 'Poppins', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+    .buycar-container {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      padding: 32px 24px;
+      max-width: 820px;
+      width: 100%;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      animation: fadeIn 0.7s cubic-bezier(.4,2,.3,1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.97);}
+      to { opacity: 1; transform: none;}
+    }
+    .car-preview {
+      flex: 1 1 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(120deg, #e0fcff 60%, #fff 100%);
+      border-radius: 14px;
+      box-shadow: 0 4px 18px #00f7ff22;
+      padding: 18px 12px 12px 12px;
+      min-width: 220px;
+      max-width: 320px;
+      margin-bottom: 0;
+      animation: carPop 0.7s cubic-bezier(.4,2,.3,1);
+    }
+    @keyframes carPop {
+      0% { opacity: 0; transform: scale(0.92);}
+      70% { opacity: 1; transform: scale(1.05);}
+      100% { opacity: 1; transform: scale(1);}
+    }
+    .car-preview img {
+      width: 100%;
+      max-width: 210px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px #0001;
+      margin-bottom: 12px;
+      background: #fff;
+      display: block;
+      object-fit: contain;
+    }
+    .car-preview .car-name {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #10141c;
+      text-align: center;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+    .formbuycar {
+      flex: 2 1 340px;
+      min-width: 260px;
+      max-width: 420px;
+      margin: 0;
+    }
+    .formbuycar h2 {
+      text-align: center;
+      color: #10141c;
+      margin-bottom: 18px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .formbuycar label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #222;
+    }
+    .formbuycar input, .formbuycar textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      border-radius: 7px;
+      border: 1px solid #cfd8dc;
+      font-size: 15px;
+      background: #f7fafd;
+      transition: border 0.2s;
+    }
+    .formbuycar input:focus, .formbuycar textarea:focus {
+      border: 1.5px solid #00f7ff;
+      outline: none;
+      background: #fff;
+    }
+    .color-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 18px;
+      margin-top: 2px;
+    }
+    .color-options {
+      display: flex;
+      gap: 12px;
+    }
+    .color-radio {
+      display: none;
+    }
+    .color-label {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2.5px solid #cfd8dc;
+      display: inline-block;
+      cursor: pointer;
+      transition: border 0.22s, box-shadow 0.22s;
+      box-shadow: 0 2px 8px #0001;
+      position: relative;
+    }
+    .color-radio:checked + .color-label {
+      border: 3px solid #00f7ff;
+      box-shadow: 0 0 0 4px #00f7ff33;
+    }
+    .color-label[for="color-trang"] { background: #fff; }
+    .color-label[for="color-den"]   { background: #222; }
+    .color-label[for="color-xam"]   { background: linear-gradient(135deg,#b0b0b0 60%,#888 100%);}
+    .color-label[for="color-xanh"]  { background: linear-gradient(135deg,#00cfd1 60%,#0077b6 100%);}
+    .color-label[for="color-do"]    { background: linear-gradient(135deg,#ff3b3b 60%,#b80000 100%);}
+    .color-label::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%) scale(0);
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: #00f7ff88;
+      opacity: 0.7;
+      transition: transform 0.18s;
+    }
+    .color-radio:checked + .color-label::after {
+      transform: translate(-50%,-50%) scale(1);
+    }
+    .car-price {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #00b6c9;
+      min-width: 150px;
+      letter-spacing: 1px;
+      margin-left: 8px;
+      margin-top: 0;
+      margin-bottom: 0;
+      text-shadow: 0 2px 8px #00f7ff22;
+      transition: color 0.2s;
+    }
+    .formbuycar textarea {
+      resize: vertical;
+    }
+    .formbuycar button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(90deg, #00f7ff 60%, #00cfd1 100%);
+      color: #10141c;
+      border: none;
+      border-radius: 7px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-top: 8px;
+      letter-spacing: 1px;
+    }
+    .formbuycar button:hover {
+      background: #10141c;
+      color: #00f7ff;
+    }
+    @media (max-width: 700px) {
+      .buycar-container {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 18px 4vw;
+        gap: 18px;
+      }
+      .car-preview {
+        max-width: 100%;
+        margin-bottom: 0;
+      }
+      .formbuycar {
+        max-width: 100%;
+      }
+      .car-price {
+        margin-left: 0;
+        margin-top: 8px;
+      }
+      .color-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="buycar-container">
+    <div class="car-preview">
+      <img id="car-img" src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/06/icon_320isportline.png" alt="BMW Xe">
+      <div class="car-name" id="car-name">BMW 320i Sport Line LCI</div>
+    </div>
+    <form class="formbuycar" autocomplete="off">
+      <h2>Đăng ký mua xe BMW</h2>
+      <label for="fullname">Họ và tên</label>
+      <input type="text" id="fullname" name="fullname" required>
+      <label for="phone">Số điện thoại</label>
+      <input type="tel" id="phone" name="phone" required pattern="[0-9]{10,12}">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+      <label>Chọn màu xe</label>
+      <div class="color-row">
+        <div class="color-options">
+          <input type="radio" class="color-radio" id="color-trang" name="color" value="Trắng" required>
+          <label class="color-label" for="color-trang" title="Trắng"></label>
+          <input type="radio" class="color-radio" id="color-den" name="color" value="Đen">
+          <label class="color-label" for="color-den" title="Đen"></label>
+          <input type="radio" class="color-radio" id="color-xam" name="color" value="Xám">
+          <label class="color-label" for="color-xam" title="Xám"></label>
+          <input type="radio" class="color-radio" id="color-xanh" name="color" value="Xanh">
+          <label class="color-label" for="color-xanh" title="Xanh"></label>
+          <input type="radio" class="color-radio" id="color-do" name="color" value="Đỏ">
+          <label class="color-label" for="color-do" title="Đỏ"></label>
+        </div>
+        <span class="car-price" id="car-price">1.529.000.000 đ</span>
+      </div>
+      <label for="note">Ghi chú</label>
+      <textarea id="note" name="note" rows="2" placeholder="Yêu cầu thêm (nếu có)"></textarea>
+      <button type="submit">Gửi đăng ký</button>
+    </form>
+  </div>
+  <script>
+    // Lấy tham số ảnh và tên xe từ URL nếu có
+    function getParam(name) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+    const img = getParam('img');
+    const name = getParam('name');
+    if(img) document.getElementById('car-img').src = img;
+    if(name) document.getElementById('car-name').textContent = name;
+
+    // Giá từng màu cho từng xe
+    const priceData = {
+      "BMW 320i Sport Line LCI": {
+        "Trắng": "1.529.000.000 đ",
+        "Đen": "1.539.000.000 đ",
+        "Xám": "1.545.000.000 đ",
+        "Xanh": "1.555.000.000 đ",
+        "Đỏ": "1.560.000.000 đ"
+      },
+      "BMW 320i M Sport LCI": {
+        "Trắng": "1.635.000.000 đ",
+        "Đen": "1.645.000.000 đ",
+        "Xám": "1.650.000.000 đ",
+        "Xanh": "1.655.000.000 đ",
+        "Đỏ": "1.660.000.000 đ"
+      },
+      "BMW 330i M Sport LCI": {
+        "Trắng": "1.989.000.000 đ",
+        "Đen": "1.999.000.000 đ",
+        "Xám": "2.009.000.000 đ",
+        "Xanh": "2.019.000.000 đ",
+        "Đỏ": "2.029.000.000 đ"
+      },
+      "BMW 520i LCI": {
+        "Trắng": "1.979.000.000 ₫",
+        "Đen": "1.989.000.000 ₫",
+        "Xám": "1.995.000.000 ₫",
+        "Xanh": "2.005.000.000 ₫",
+        "Đỏ": "2.015.000.000 ₫"
+      },
+      "BMW 520i M Sport LCI": {
+        "Trắng": "2.169.000.000 ₫",
+        "Đen": "2.179.000.000 ₫",
+        "Xám": "2.185.000.000 ₫",
+        "Xanh": "2.195.000.000 ₫",
+        "Đỏ": "2.205.000.000 ₫"
+      },
+      "BMW 530i M Sport LCI": {
+        "Trắng": "2.759.000.000 ₫",
+        "Đen": "2.769.000.000 ₫",
+        "Xám": "2.779.000.000 ₫",
+        "Xanh": "2.789.000.000 ₫",
+        "Đỏ": "2.799.000.000 ₫"
+      },
+      "BMW X7": {
+        "Trắng": "5.549.000.000 đ",
+        "Đen": "5.559.000.000 đ",
+        "Xám": "5.569.000.000 đ",
+        "Xanh": "5.579.000.000 đ",
+        "Đỏ": "5.589.000.000 đ"
+      },
+      "BMW X3": {
+        "Trắng": "1.855.000.000 ₫",
+        "Đen": "1.865.000.000 ₫",
+        "Xám": "1.875.000.000 ₫",
+        "Xanh": "1.885.000.000 ₫",
+        "Đỏ": "1.895.000.000 ₫"
+      },
+      "BMW X4": {
+        "Trắng": "2.999.000.000 đ",
+        "Đen": "3.009.000.000 đ",
+        "Xám": "3.019.000.000 đ",
+        "Xanh": "3.029.000.000 đ",
+        "Đỏ": "3.039.000.000 đ"
+      }
+    };
+
+    // Lấy tên xe hiện tại
+    function getCurrentCarName() {
+      return document.getElementById('car-name').textContent.trim();
+    }
+    const priceSpan = document.getElementById('car-price');
+    // Hàm cập nhật giá khi chọn màu
+    function updatePrice() {
+      const carName = getCurrentCarName();
+      const color = document.querySelector('input[name="color"]:checked');
+      if (color && priceData[carName] && priceData[carName][color.value]) {
+        priceSpan.textContent = priceData[carName][color.value];
+      } else if (priceData[carName]) {
+        priceSpan.textContent = Object.values(priceData[carName])[0];
+      }
+    }
+    document.querySelectorAll('input[name="color"]').forEach(function(radio) {
+      radio.addEventListener('change', updatePrice);
+    });
+    updatePrice();
+
+    // Hiện thông báo khi gửi form thành công
+    document.querySelector('.formbuycar').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Đã gửi thành công!');
+      this.reset();
+      updatePrice();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMW News - RoyalDrive</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #0a0a0a;
+      color: white;
+    }
+
+    .news-header {
+      background: linear-gradient(to right, #00f7ff, #003cff);
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .news-header h1 {
+      margin: 0;
+      font-size: 40px;
+      letter-spacing: 2px;
+    }
+
+    .news-section {
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .news-article {
+      display: flex;
+      flex-direction: column;
+      background-color: #121212;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+    }
+
+    .news-article h2 {
+      margin-top: 0;
+      color: #00f7ff;
+    }
+
+    .news-article p {
+      line-height: 1.6;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 0 12px rgba(0, 247, 255, 0.4);
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    @media (min-width: 768px) {
+      .news-article {
+        flex-direction: row;
+        gap: 30px;
+      }
+
+      .news-article > div {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="news-header">
+    <h1>Tin Tức Mới Nhất Về BMW</h1>
+  </div>
+
+  <div class="news-section">
+    <div class="news-article">
+      <div>
+        <h2>BMW Vision: Đột Phá Thiết Kế Với Mẫu Xe Mới</h2>
+        <p>Mẫu xe BMW mới nhất không chỉ gây ấn tượng bởi ngoại hình mạnh mẽ, mà còn mang công nghệ đỉnh cao và khả năng vận hành vượt trội. Được phát triển bởi đội ngũ kỹ sư tại Đức, đây là bước tiến quan trọng trong chiến lược xe điện của BMW toàn cầu.</p>
+        <p>Chiêm ngưỡng video giới thiệu độc quyền dưới đây:</p>
+      </div>
+
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/rzQAUODAd4s?autoplay=1&mute=1&loop=1&playlist=rzQAUODAd4s" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="news-article">
+      <div>
+        <h2>Trải Nghiệm BMW i7 Mới - Đỉnh Cao Công Nghệ</h2>
+        <p>BMW i7 mang đến trải nghiệm lái hoàn toàn khác biệt với thiết kế nội thất sang trọng, công nghệ AI tiên tiến và hệ truyền động điện hoàn toàn. Mẫu xe này đang tạo nên cơn sốt tại châu Âu và sắp có mặt tại Việt Nam.</p>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

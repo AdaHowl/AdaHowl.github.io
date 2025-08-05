@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Đăng nhập BMW RoyalDrive</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: linear-gradient(120deg, #10141c 60%, #00f7ff 100%);
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-container {
+      background: rgba(255,255,255,0.97);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      padding: 40px 32px 32px 32px;
+      max-width: 420px;
+      width: 100%;
+      margin: 40px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .login-container::before {
+      content: "";
+      position: absolute;
+      top: -60px; left: -60px;
+      width: 160px; height: 160px;
+      background: linear-gradient(135deg, #00f7ff 0%, #10141c 100%);
+      opacity: 0.15;
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .login-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      gap: 10px;
+    }
+    .login-logo img {
+      width: 48px;
+      height: 48px;
+    }
+    .login-logo span {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #10141c;
+      letter-spacing: 2px;
+    }
+    .login-container h2 {
+      text-align: center;
+      color: #10141c;
+      margin-bottom: 18px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .login-container label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #222;
+    }
+    .login-container input {
+      width: 100%;
+      padding: 11px 12px;
+      margin-bottom: 18px;
+      border-radius: 7px;
+      border: 1px solid #cfd8dc;
+      font-size: 15px;
+      background: #f7fafd;
+      transition: border 0.2s;
+    }
+    .login-container input:focus {
+      border: 1.5px solid #00f7ff;
+      outline: none;
+      background: #fff;
+    }
+    .login-container button {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(90deg, #00f7ff 60%, #00cfd1 100%);
+      color: #10141c;
+      border: none;
+      border-radius: 7px;
+      font-weight: bold;
+      font-size: 17px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-top: 8px;
+      letter-spacing: 1px;
+    }
+    .login-container button:hover {
+      background: #10141c;
+      color: #00f7ff;
+    }
+    .login-container .signup-link {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 15px;
+    }
+    .login-container .signup-link a {
+      color: #00cfd1;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .login-container .signup-link a:hover {
+      color: #10141c;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2048px-BMW.svg.png" alt="BMW Logo">
+      <span>BMW</span>
+    </div>
+    <h2>Đăng nhập tài khoản</h2>
+    <form autocomplete="off">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="Email" required />
+
+      <label for="password">Mật khẩu</label>
+      <input type="password" id="password" name="Mật khẩu" required minlength="6" />
+
+      <button type="submit">Đăng nhập</button>
+    </form>
+    <div class="signup-link">
+      Chưa có tài khoản? <a href="login2.html">Đăng ký</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -5,6 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BMW RoyalDrive</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    html { scroll-behavior: smooth; }
+    .car-card {
+      transition: 
+        transform 0.22s cubic-bezier(.4,2,.3,1), 
+        box-shadow 0.22s, 
+        border 0.18s,
+        filter 0.5s,
+        opacity 0.7s;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border: 2px solid transparent;
+      position: relative;
+      z-index: 1;
+      background: #fff;
+    }
+    .car-card:hover {
+      transform: translateY(-8px) scale(1.045);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 0 0 2px #00f7ff55;
+      border: 2px solid #00f7ff;
+      z-index: 2;
+    }
+    .car-card:active {
+      border: 2px solid #10141c;
+      background: #e0fcff;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      transform: scale(0.98);
+    }
+    .car-card.active-highlight {
+      border: 3px solid #00f7ff !important;
+      box-shadow: 0 0 0 0 #00f7ff55, 0 8px 32px rgba(0,0,0,0.18), 0 0 32px 10px #00f7ff77;
+      filter: brightness(1.08) drop-shadow(0 0 12px #00f7ff88);
+      opacity: 1;
+      z-index: 3;
+      transition: box-shadow 0.5s, border 0.5s, filter 0.7s, opacity 0.7s;
+    }
+  </style>
 </head>
 <body>
 
@@ -20,20 +57,24 @@
       <li class="dropdown" id="menu-cars">
         <a href="#">BMW ▾</a>
         <ul class="dropdown-menu small-dropdown">
-          <li><a href="#">BMW 3 Series</a></li>
-          <li><a href="#">BMW 5 Series</a></li>
-          <li><a href="#">BMW 7 Series</a></li>
-          <li><a href="#">BMW X5</a></li>
-          <li><a href="#">BMW iX</a></li>
+          <li><a href="#bmw-320i" class="car-link" data-car="bmw-320i">BMW 320i Sport Line LCI</a></li>
+          <li><a href="#bmw-320i-msport" class="car-link" data-car="bmw-320i-msport">BMW 320i M Sport LCI</a></li>
+          <li><a href="#bmw-330i" class="car-link" data-car="bmw-330i">BMW 330i M Sport LCI</a></li>
+          <li><a href="#bmw-520i" class="car-link" data-car="bmw-520i">BMW 520i LCI</a></li>
+          <li><a href="#bmw-520i-msport" class="car-link" data-car="bmw-520i-msport">BMW 520i M Sport LCI</a></li>
+          <li><a href="#bmw-530i" class="car-link" data-car="bmw-530i">BMW 530i M Sport LCI</a></li>
+          <li><a href="#bmw-x7" class="car-link" data-car="bmw-x7">BMW X7</a></li>
+          <li><a href="#bmw-x3" class="car-link" data-car="bmw-x3">BMW X3</a></li>
+          <li><a href="#bmw-x4" class="car-link" data-car="bmw-x4">BMW X4</a></li>
         </ul>
       </li>
-      <li><a href="#">News</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="new.html">News</a></li>
+      <li><a href="contact.html">Contact</a></li>
       <li class="dropdown" id="menu-auth">
         <a href="#" class="login-highlight">Login ▾</a>
         <ul class="dropdown-menu small-dropdown auth-menu">
-          <li><a href="#" id="openRegister">Sign Up</a></li>
-          <li><a href="#" id="openLogin">Login</a></li>
+          <li><a href="login2.html">Sign Up</a></li>
+          <li><a href="login.html">Login</a></li>
         </ul>
       </li>
     </ul>
@@ -42,49 +83,115 @@
   <!-- Hero Background Section -->
   <header class="hero-section" id="heroSection"></header>
 
-  <!-- Login Modal -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content narrow">
-      <span class="close-btn" id="closeLogin">&times;</span>
-      <h2>Login</h2>
-      <form>
-        <input type="email" placeholder="Email" required />
-        <input type="password" placeholder="Password" required />
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Register Modal -->
-  <div id="registerModal" class="modal">
-    <div class="modal-content narrow">
-      <span class="close-btn" id="closeRegister">&times;</span>
-      <h2>Create Account</h2>
-      <form>
-        <input type="text" placeholder="Full Name" required />
-        <input type="email" placeholder="Email" required />
-        <input type="password" placeholder="Password" required />
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
-  </div>
-
   <!-- Car Showroom Section -->
   <section class="car-showroom">
     <h2 class="section-title">BMW Showroom</h2>
     <div class="car-grid">
-      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/06/icon_320isportline.png"><h3>BMW 320i Sport Line LCI</h3><p>1.529.000.000 đ</p></div>
-      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/06/icon_320isport.png"><h3>BMW 320i M Sport LCI</h3><p>1.635.000.000 đ</p></div>
-      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/06/icon_330i.png"><h3>BMW 330i M Sport LCI</h3><p>1.989.000.000 đ</p></div>
-      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2022/11/Artboard-1-copy-3.png"><h3>BMW 520i LCI</h3><p>1.979.000.000 ₫</p></div>
-      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2022/11/520i.png"><h3>BMW 520i M Sport LCI</h3><p>2.169.000.000 ₫</p></div>
-      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2022/11/530i.png"><h3>BMW 530i M Sport LCI</h3><p>2.759.000.000 ₫</p></div>
-      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/08/x7-lci.png"><h3>BMW X7</h3><p>5.549.000.000 đ</p></div>
-      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2022/12/x3.png"><h3>BMW X3</h3><p>1.855.000.000 ₫</p></div>
-      <div class="car-card"><img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/05/z5248889924760_a9e0a75792b2557163d0b55e2d2f698e.jpg"><h3>BMW X4</h3><p>2.999.000.000 đ</p></div>
+      <div class="car-card" 
+        data-img="https://bmwphunhuan.com.vn/wp-content/uploads/2023/06/icon_320isportline.png"
+        data-name="BMW 320i Sport Line LCI">
+        <img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/06/icon_320isportline.png">
+        <h3>BMW 320i Sport Line LCI</h3>
+        <p>1.529.000.000 đ</p>
+      </div>
+      <div class="car-card" 
+        data-img="https://bmwphunhuan.com.vn/wp-content/uploads/2023/06/icon_320isport.png"
+        data-name="BMW 320i M Sport LCI">
+        <img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/06/icon_320isport.png">
+        <h3>BMW 320i M Sport LCI</h3>
+        <p>1.635.000.000 đ</p>
+      </div>
+      <div class="car-card" 
+        data-img="https://bmwphunhuan.com.vn/wp-content/uploads/2023/06/icon_330i.png"
+        data-name="BMW 330i M Sport LCI">
+        <img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/06/icon_330i.png">
+        <h3>BMW 330i M Sport LCI</h3>
+        <p>1.989.000.000 đ</p>
+      </div>
+      <div class="car-card" 
+        data-img="https://bmwphunhuan.com.vn/wp-content/uploads/2022/11/Artboard-1-copy-3.png"
+        data-name="BMW 520i LCI">
+        <img src="https://bmwphunhuan.com.vn/wp-content/uploads/2022/11/Artboard-1-copy-3.png">
+        <h3>BMW 520i LCI</h3>
+        <p>1.979.000.000 ₫</p>
+      </div>
+      <div class="car-card" 
+        data-img="https://bmwphunhuan.com.vn/wp-content/uploads/2022/11/520i.png"
+        data-name="BMW 520i M Sport LCI">
+        <img src="https://bmwphunhuan.com.vn/wp-content/uploads/2022/11/520i.png">
+        <h3>BMW 520i M Sport LCI</h3>
+        <p>2.169.000.000 ₫</p>
+      </div>
+      <div class="car-card" 
+        data-img="https://bmwphunhuan.com.vn/wp-content/uploads/2022/11/530i.png"
+        data-name="BMW 530i M Sport LCI">
+        <img src="https://bmwphunhuan.com.vn/wp-content/uploads/2022/11/530i.png">
+        <h3>BMW 530i M Sport LCI</h3>
+        <p>2.759.000.000 ₫</p>
+      </div>
+      <div class="car-card" 
+        data-img="https://bmwphunhuan.com.vn/wp-content/uploads/2023/08/x7-lci.png"
+        data-name="BMW X7">
+        <img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/08/x7-lci.png">
+        <h3>BMW X7</h3>
+        <p>5.549.000.000 đ</p>
+      </div>
+      <div class="car-card" 
+        data-img="https://bmwphunhuan.com.vn/wp-content/uploads/2022/12/x3.png"
+        data-name="BMW X3">
+        <img src="https://bmwphunhuan.com.vn/wp-content/uploads/2022/12/x3.png">
+        <h3>BMW X3</h3>
+        <p>1.855.000.000 ₫</p>
+      </div>
+      <div class="car-card" 
+        data-img="https://bmwphunhuan.com.vn/wp-content/uploads/2023/05/z5248889924760_a9e0a75792b2557163d0b55e2d2f698e.jpg"
+        data-name="BMW X4">
+        <img src="https://bmwphunhuan.com.vn/wp-content/uploads/2023/05/z5248889924760_a9e0a75792b2557163d0b55e2d2f698e.jpg">
+        <h3>BMW X4</h3>
+        <p>2.999.000.000 đ</p>
+      </div>
     </div>
   </section>
 
+  <script>
+    // Hiệu ứng nhận diện chỉ khi click menu xe, mượt và đẹp
+    document.querySelectorAll('.car-link').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var carId = this.getAttribute('data-car');
+        var carCard = document.getElementById(carId);
+        if (carCard) {
+          document.querySelectorAll('.car-card.active-highlight').forEach(function(card){
+            card.classList.remove('active-highlight');
+            card.style.opacity = "";
+            card.style.filter = "";
+          });
+          carCard.classList.add('active-highlight');
+          carCard.style.opacity = "1";
+          carCard.style.filter = "brightness(1.08) drop-shadow(0 0 12px #00f7ff88)";
+          setTimeout(function(){
+            carCard.style.opacity = "0.7";
+            carCard.style.filter = "brightness(1.01)";
+          }, 1200);
+          setTimeout(function(){
+            carCard.classList.remove('active-highlight');
+            carCard.style.opacity = "";
+            carCard.style.filter = "";
+          }, 1800);
+        }
+      });
+    });
+
+    // Khi bấm vào xe sẽ chuyển sang formbuycar.html và truyền ảnh + tên xe
+    document.querySelectorAll('.car-card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        var img = encodeURIComponent(card.getAttribute('data-img'));
+        var name = encodeURIComponent(card.getAttribute('data-name'));
+        window.location.href = `formbuycar.html?img=${img}&name=${name}`;
+      });
+    });
+  </script>
   <script src="script.js"></script>
+
 </body>
-</html
+
+</html>
